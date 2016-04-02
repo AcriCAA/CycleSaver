@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vzr-FM-RLk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vzr-FM-RLk">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -59,7 +59,7 @@
                             <constraint firstItem="Jw3-UJ-sqW" firstAttribute="centerX" secondItem="lZP-Tc-MEc" secondAttribute="centerX" id="x7k-c4-KxS"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Record" image="tabbar_record.png" selectedImage="tabbar_record.png" id="ak7-PL-4eX"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="tabbar_record" selectedImage="tabbar_record.png" id="ak7-PL-4eX"/>
                     <connections>
                         <outlet property="mapView" destination="KcH-P9-tFZ" id="rZT-av-enA"/>
                     </connections>
@@ -195,7 +195,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="jtl-Lq-PxP" secondAttribute="trailing" constant="-18" id="vpS-lB-0Vb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Trips" image="tabbar_view.png" selectedImage="tabbar_view.png" id="H6o-Xn-3Q5"/>
+                    <tabBarItem key="tabBarItem" title="Trips" image="tabbar_view" selectedImage="tabbar_view.png" id="H6o-Xn-3Q5"/>
                     <connections>
                         <outlet property="tripTableView" destination="tdR-jt-rvB" id="44t-hh-b9A"/>
                         <segue destination="eVV-eR-xoK" kind="show" identifier="ShowTripMap" id="rMu-ed-YfF"/>
@@ -229,7 +229,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="tabbar_record" width="30" height="30"/>
         <image name="tabbar_record.png" width="30" height="30"/>
+        <image name="tabbar_view" width="30" height="30"/>
         <image name="tabbar_view.png" width="30" height="30"/>
     </resources>
 </document>

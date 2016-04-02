@@ -14,10 +14,8 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
     var manager: CLLocationManager?
-    
-    lazy var coreDataStack = CoreDataStack()
+    lazy var store = CPStore(name: "mainStore")
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,11 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
-        coreDataStack.saveContext()
+        // coreDataStack.saveContext()
     }
     
     func applicationWillTerminate(application: UIApplication) {
-        coreDataStack.saveContext()
+        // coreDataStack.saveContext()
     }
 }
 

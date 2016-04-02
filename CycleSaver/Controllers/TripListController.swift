@@ -18,47 +18,23 @@ class TripListController: UIViewController {
     @IBOutlet weak var tripTableView: UITableView!
     
     var fetchedResultsController : NSFetchedResultsController!
-    lazy var coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
     let formatter = NSDateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        formatter.dateStyle = .ShortStyle
-        formatter.timeStyle = .ShortStyle
-        
-        let fetchRequest = NSFetchRequest(entityName: "Trip")
-        
-        let startSort = NSSortDescriptor(key: "start", ascending: true)
-        let stopSort = NSSortDescriptor(key: "stop", ascending: true)
-
-        fetchRequest.sortDescriptors = [startSort, stopSort]
-
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-            managedObjectContext: coreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchedResultsController.delegate = self
-        tripTableView.delegate = self
-
-        do {
-            try fetchedResultsController.performFetch()
-            tripTableView.reloadData()
-        } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
-        }
     }
     
     
     func configureCell(cell: TripCell, indexPath: NSIndexPath) {
-        let trip = fetchedResultsController.objectAtIndexPath(indexPath) as! Trip
-        
-        if let tripStart = trip.start {
-            cell.startLabel.text = formatter.stringFromDate(tripStart)
-        }
-        
-        if let tripStop = trip.stop {
-            cell.stopLabel.text = formatter.stringFromDate(tripStop)
-        }
+//        let trip = fetchedResultsController.objectAtIndexPath(indexPath) as! Trip
+//        
+//        if let tripStart = trip.start {
+//            cell.startLabel.text = formatter.stringFromDate(tripStart)
+//        }
+//        
+//        if let tripStop = trip.stop {
+//            cell.stopLabel.text = formatter.stringFromDate(tripStop)
+//        }
         
         cell.coordsCount.text = "???"
         // TODO: how to get related obj
@@ -97,14 +73,14 @@ extension TripListController: UITableViewDelegate {
         let trip = fetchedResultsController.objectAtIndexPath(indexPath) as! Trip
         print("Selected trip that started at \(trip.start).")
         
-        self.performSegueWithIdentifier("ShowTripMap", sender: trip)
+        //self.performSegueWithIdentifier("ShowTripMap", sender: trip)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "ShowTripMap") {
             if let tripMapController = segue.destinationViewController as? TripDetailController {
-                tripMapController.trip = sender as? Trip
-                tripMapController.coreDataStack = coreDataStack
+//                tripMapController.trip = sender as? Trip
+//                tripMapController.coreDataStack = coreDataStack
             }
         }
     }
@@ -115,11 +91,11 @@ extension TripListController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
-        case .Delete:
+//        case .Delete:
             // delete from data source here; this will then trigger deletion on the NSFetchedResultsControllerDelegate, which updates the view
-            let trip = fetchedResultsController.objectAtIndexPath(indexPath) as! Trip
-            coreDataStack.context.deleteObject(trip)
-            coreDataStack.saveContext()
+//            let trip = fetchedResultsController.objectAtIndexPath(indexPath) as! Trip
+//            coreDataStack.context.deleteObject(trip)
+//            coreDataStack.saveContext()
         default: break
         }
     }
