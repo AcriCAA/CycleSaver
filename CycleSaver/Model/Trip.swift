@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import MapKit
 
 struct Trip {
     
     var name: String
     let start: Double
-    let stop: Double
+    var stop: Double?
     var distance: Double
     var locations: [Location]
     
-    init(name n: String, start sta: Double, stop sto: Double, distance d: Double, locations l: [Location]) {
+    init(name n: String, start sta: Double, stop sto: Double?, distance d: Double, locations l: [Location]) {
         name = n
         start = sta
         stop = sto
@@ -51,25 +52,39 @@ extension Trip: Encodable {
 extension Trip {
     
     
-    /// starts the trip
-    func startTrip() {
-    
+    /// stores the current trip to file and returns name
+    func storeCurrentTrip() {
+        let saveName = "Trip_\(start.string)"
+        NSUserDefaults.standardUserDefaults().setValue(self.encode, forKey: saveName)
     }
     
-    /// ends trip
-    func endTrip() {
+    /// retrieves trip from file and returns name
+    static func retrieveTrip(withStart s: Double) -> Trip? {
+        let saveName = "Trip_\(s.string)"
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let object = defaults.objectForKey(saveName) {
+            let decoded = Trip.decode(object: object)
+            return decoded
+        }
+        HGReportHandler.shared.report("Open Defaults: Trip with date - \(s) was not found in user defaults, returning nil", type: .Info)
+        return nil
+    }
+}
+
+
+extension Trip {
     
+    /// returns the iterated name, iterated if another object in array already had value
+    func iterated(forArray array: [TripInfo]) -> String {
+        let names = array.map { $0.name }
+        if names.contains(self.name) {
+            let iterationNum = array.count + 1
+            return self.name + "\(iterationNum)"
+        }
+        return self.name
     }
     
-//    /// stores the current trip to file and returns name
-//    func storeCurrentTrip() -> String {
-//        
-//        
-//    }
-//    
-//    /// retrieves trip from file and returns name
-//    func retrieveTrip(withName: String) -> Trip? {
-//        
-//    }
-    
+    var tripInfo: TripInfo {
+        return TripInfo(name: self.name, uploaded: false, start: self.start, stop: self.stop, distance: self.distance)
+    }
 }

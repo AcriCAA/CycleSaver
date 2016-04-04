@@ -16,4 +16,8 @@ extension Double {
         return NSDate(timeIntervalSinceReferenceDate: time)
     }
     
+    var string: String {
+        return String(self)
+    }
+    
 }

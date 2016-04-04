@@ -27,6 +27,21 @@ final class CPStore {
         currentTrip = ct
         tripInfos = ti
     }
+    
+    /// starts a new trip with an iterated trip name
+    func startNewTrip() {
+        currentTrip = Trip(name: "New Trip", start: NSDate().double, stop: nil, distance: 0, locations: [])
+        currentTrip?.name = currentTrip!.iterated(forArray: tripInfos)
+    }
+    
+    
+    /// saves current trip if it exists and there are more than 5 locations stored for the trip.
+    func saveCurrentTrip() {
+        if let ct = currentTrip where currentTrip!.locations.count > 5 {
+            ct.storeCurrentTrip()
+            tripInfos.append(ct.tripInfo)
+        }
+    }
 }
 
 

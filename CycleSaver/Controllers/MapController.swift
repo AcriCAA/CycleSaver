@@ -26,8 +26,8 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
     var lastLocation: CLLocation?
     var accruedDistance: Double = 0.0
     
-    var readingEntity: NSEntityDescription?
-    var tripEntity: NSEntityDescription?
+//    var readingEntity: NSEntityDescription?
+//    var tripEntity: NSEntityDescription?
     
     var managedContext: NSManagedObjectContext!
     
@@ -38,17 +38,16 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        mapView.delegate = self
-//        manager?.delegate = self
-//        
-//        let originRegion = MKCoordinateRegionMakeWithDistance(originPoint.coordinate, 2000, 2000)
-//        mapView.setRegion(originRegion, animated: false)
-//        
-//        // show and track user location
-//        mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
-//        mapView.showsUserLocation = true
-//        
-//        
+        mapView.delegate = self
+        
+        let originRegion = MKCoordinateRegionMakeWithDistance(originPoint.coordinate, 2000, 2000)
+        mapView.setRegion(originRegion, animated: false)
+        
+        // show and track user location
+        mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
+        mapView.showsUserLocation = true
+        
+        
 //        managedContext = coreDataStack.context
 //        if (managedContext == nil) {
 //            print("Have no core data context in viewDidLoad!")
@@ -98,6 +97,10 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
 //            accruedDistance = 0.0
 //            mapView.removeOverlays(mapView.overlays)
 //        }
+    }
+    
+    func startNewTrip() {
+        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {

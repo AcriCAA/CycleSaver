@@ -11,15 +11,15 @@ import Foundation
 struct TripInfo {
     var name: String
     var uploaded: Bool
-    let startTime: Double
-    let endTime: Double
+    let start: Double
+    let stop: Double?
     let distance: Double
     
-    init(name n: String, uploaded u: Bool, startTime s: Double, endTime e: Double, distance d: Double) {
+    init(name n: String, uploaded u: Bool, start s: Double, stop st: Double?, distance d: Double) {
         name = n
         uploaded = u
-        startTime = s
-        endTime = e
+        start = s
+        stop = st
         distance = d
     }
 }
@@ -30,8 +30,8 @@ extension TripInfo: Encodable {
         var dict = HGDICT()
         dict["name"] = name
         dict["uploaded"] = uploaded
-        dict["startTime"] = startTime
-        dict["endTime"] = endTime
+        dict["start"] = start
+        dict["stop"] = stop
         dict["distance"] = distance
         return dict
     }
@@ -40,9 +40,10 @@ extension TripInfo: Encodable {
         let dict = hgdict(fromObject: object, decoderName: "Trip")
         let n = dict["name"].string
         let u = dict["uploaded"].bool
-        let s = dict["startTime"].double
-        let e = dict["endTime"].double
+        let s = dict["start"].double
+        let st = dict["stop"].double
         let d = dict["distance"].double
-        return TripInfo(name: n, uploaded: u, startTime: s, endTime: e, distance: d)
+        return TripInfo(name: n, uploaded: u, start: s, stop: st, distance: d)
     }
 }
+
